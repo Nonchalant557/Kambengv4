@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 const { getPrefix } = global.utils;
 const { commands, aliases } = global.GoatBot;
-const doNotDelete = "[ 義 𝗚𝗶𝘆𝘂 | 🌊 勇 ]";
+const doNotDelete = "[ 義 Taki | 🌊 勇 ]";
  
 module.exports = {
   config: {
@@ -66,10 +66,10 @@ module.exports = {
  
       const helpListImages = [
  
-"https://i.imgur.com/DPTioGT.gif",
-"https://i.imgur.com/DPTioGT.gif', ",
-"https://i.imgur.com/DPTioGT.gif",
-"https://i.imgur.com/DPTioGT.gif",
+"https://i.imgur.com/O5JOURb.png",
+"https://i.imgur.com/O5JOURb.png', ",
+"https://i.imgur.com/O5JOURb.png",
+"https://i.imgur.com/O5JOURb.png",
 "https://i.imgur.com/RrRNARq.gif",
 "https://i.imgur.com/jBd6fgF.gif",
 "https://i.imgur.com/uB4nTr7.gif"

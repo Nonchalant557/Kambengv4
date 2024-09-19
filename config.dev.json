@@ -1,7 +1,7 @@
 {
   "facebookAccount": {
-    "email": "",
-    "password": "",
+    "email": "rajrtyt9@gmail.com",
+    "password": "93404100",
     "2FASecret": "",
     "i_user": "",
     "proxy": null,
@@ -17,20 +17,20 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "61562362827346",
-    "100075058221244"
+    "61559409966039",
+    ""
   ],
   "whiteListMode": {
     "enable": false,
     "whiteListIds": [],
     "notes": "if you enable this feature, only the ids in the whiteListIds section can use the bot"
   },
-  "OWNER": "Gab Yu",
-  "AGE": "14",
+  "OWNER": "RAHUL RAJ",
+  "AGE": "17",
   "GENDER": "MALE",
   "nickNameBot": "義 𝗚𝗶𝘆𝘂 | 🌊 勇",
-  "FACEBOOK": "https://www.facebook.com/ 61562362827346",
-  "prefix": "/",
+  "FACEBOOK": "https://www.facebook.com/profile.php?id=61559409966039",
+  "prefix": ".",
   "database": {
     "type": "sqlite",
     "uriMongodb": "",

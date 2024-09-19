@@ -1,86 +1,61 @@
 const fs = require("fs-extra");
-
 const { utils } = global;
 
+// Array of image URLs
+const imageUrls = [
+    "https://i.imgur.com/e86WwHd.gif",
+    "https://i.imgur.com/grcQ3oT.gif",
+    "https://i.imgur.com/4NAv86j.gif",
 
+"https://i.imgur.com/LRmHU6f.gif",
+ "https://i.imgur.com/EzBzn8u.gif",
+"https://i.imgur.com/PvfxA4u.gif",
+"https://i.imgur.com/W31mBGY.gif",
+"https://i.imgur.com/wEbJuHi.gif",
+"https://i.imgur.com/DH3dgH5.gif",
+"https://i.imgur.com/z3tdVxg.gif",
+"https://i.imgur.com/uSriDZJ.gif",
+    // Add more image URLs as needed
+];
 
 module.exports = {
-
-  config: {
-
-    name: "prefix",
-
-    version: "1.3",
-
-    author: "NTKhang",
-
-    countDown: 5,
-
-    role: 0,
-
-    shortDescription: "Thay đổi prefix của bot",
-
-    longDescription: "Thay đổi dấu lệnh của bot trong box chat của bạn hoặc cả hệ thống bot (chỉ admin bot)",
-
-    category: "config",
-
-    guide: {
-
-      vi: "   {pn} <new prefix>: thay đổi prefix mới trong box chat của bạn"
-
-        + "\n   Ví dụ:"
-
-        + "\n    {pn} #"
-
-        + "\n\n   {pn} <new prefix> -g: thay đổi prefix mới trong hệ thống bot (chỉ admin bot)"
-
-        + "\n   Ví dụ:"
-
-        + "\n    {pn} # -g"
-
-        + "\n\n   {pn} reset: thay đổi prefix trong box chat của bạn về mặc định",
-
-      en: "   {pn} <new prefix>: change new prefix in your box chat"
-
-        + "\n   Example:"
-
-        + "\n    {pn} #"
-
-        + "\n\n   {pn} <new prefix> -g: change new prefix in system bot (only admin bot)"
-
-        + "\n   Example:"
-
-        + "\n    {pn} # -g"
-
-        + "\n\n   {pn} reset: change prefix in your box chat to default"
-
-    }
-
-  },
-
-
-
-  langs: {
-
-    vi: {
-
-      reset: "Đã reset prefix của bạn về mặc định: %1",
-
-      onlyAdmin: "Chỉ admin mới có thể thay đổi prefix hệ thống bot",
-
-      confirmGlobal: "Vui lòng thả cảm xúc bất kỳ vào tin nhắn này để xác nhận thay đổi prefix của toàn bộ hệ thống bot",
-
-      confirmThisThread: "Vui lòng thả cảm xúc bất kỳ vào tin nhắn này để xác nhận thay đổi prefix trong nhóm chat của bạn",
-
-      successGlobal: "Đã thay đổi prefix hệ thống bot thành: %1",
-
-      successThisThread: "Đã thay đổi prefix trong nhóm chat của bạn thành: %1",
-
-      myPrefix: "🌐 Prefix của hệ thống: %1\n🛸 Prefix của nhóm bạn: %2"
-
+    config: {
+        name: "prefix",
+        version: "1.4",
+        author: "NTKhang // Raj",
+        countDown: 5,
+        role: 0,
+        description: "Change the bot's command prefix in your chat box or system-wide (admin only)",
+        category: "config",
+        guide: {
+            vi: "   {pn} <new prefix>: change new prefix in your box chat"
+                + "\n   Example:"
+                + "\n    {pn} #"
+                + "\n\n   {pn} <new prefix> -g: change new prefix in system bot (admin only)"
+                + "\n   Example:"
+                + "\n    {pn} # -g"
+                + "\n\n   {pn} reset: reset prefix in your box chat to default",
+            en: "   {pn} <new prefix>: change new prefix in your box chat"
+                + "\n   Example:"
+                + "\n    {pn} #"
+                + "\n\n   {pn} <new prefix> -g: change new prefix in system bot (admin only)"
+                + "\n   Example:"
+                + "\n    {pn} # -g"
+                + "\n\n   {pn} reset: reset prefix in your box chat to default"
+        }
     },
 
-    en: {
+    langs: {
+        vi: {
+            reset: "Reset your prefix to default: %1",
+            onlyAdmin: "Only admin can change the system bot prefix",
+            confirmGlobal: "Please react to this message to confirm changing the system bot prefix",
+            confirmThisThread: "Please react to this message to confirm changing the prefix in your chat box",
+            successGlobal: "Changed system bot prefix to: %1",
+            successThisThread: "Changed prefix in your chat box to: %1",
+            myPrefix: "🌐 System prefix: %1\n🛸 Your box chat prefix: %2"
+        },
+        en: {
 
       reset: "𝗬𝗼𝘂𝗿 𝗽𝗿𝗲𝗳𝗶𝘅 𝗵𝗮𝘀 𝗯𝗲𝗲𝗻 𝗿𝗲𝘀𝗲𝘁 𝘁𝗼 𝗱𝗲𝗳𝗮𝘂𝗹𝘁: %1",
 
@@ -94,126 +69,68 @@ module.exports = {
 
       successThisThread: "𝗖𝗵𝗮𝗻𝗴𝗲𝗱 𝗽𝗿𝗲𝗳𝗶𝘅 𝗶𝗻 𝘆𝗼𝘂𝗿 𝗯𝗼𝘅 𝗰𝗵𝗮𝘁 𝘁𝗼: %1",
 
-      myPrefix: "\n\n🟢\x20\x20\x20\x20[✰-𝗣𝗥𝗘𝗙𝗜𝗫⊰⊱❊]\x20\x20\x20\x20🟢\n\n┏━━ [ 義 𝗚𝗶𝘆𝘂 | 🌊 勇 ]━━➣\n┃🌊 𝗦𝘆𝘀𝘁𝗲𝗺 𝗽𝗿𝗲𝗳𝗶𝘅: [ %1 ]\n┃🌊 𝗬𝗼𝘂𝗿 𝗯𝗼𝘅 𝗰𝗵𝗮𝘁 𝗽𝗿𝗲𝗳𝗶𝘅: [ %2 ]\n┗━━━━━━━━━━━━➢"
+      myPrefix: "\n\n🟢\x20\x20\x20\x20[✰-𝗣𝗥𝗘𝗙𝗜𝗫⊰⊱❊]\x20\x20\x20\x20🟢\n\n┏━━ [ 義 Yahiko | 🌊 勇 ]━━➣\n┃🌊 𝗦𝘆𝘀𝘁𝗲𝗺 𝗽𝗿𝗲𝗳𝗶𝘅: [ %1 ]\n┃🌊 𝗬𝗼𝘂𝗿 𝗯𝗼𝘅 𝗰𝗵𝗮𝘁 𝗽𝗿𝗲𝗳𝗶𝘅: [ %2 ]\n┗━━━━━━━━━━━━➢"
 
     }
 
   },
 
+    onStart: async function ({ message, role, args, commandName, event, threadsData, getLang }) {
+        if (!args[0])
+            return message.SyntaxError();
 
+        if (args[0] == 'reset') {
+            await threadsData.set(event.threadID, null, "data.prefix");
+            return message.reply(getLang("reset", global.GoatBot.config.prefix));
+        }
 
-  onStart: async function ({ message, role, args, commandName, event, threadsData, getLang }) {
-
-    if (!args[0])
-
-      return message.SyntaxError();
-
-
-
-    if (args[0] == 'reset') {
-
-      await threadsData.set(event.threadID, null, "data.prefix");
-
-      return message.reply(getLang("reset", global.GoatBot.config.prefix));
-
-    }
-
-
-
-    const newPrefix = args[0];
-
-    const formSet = {
-
-      commandName,
-
-      author: event.senderID,
-
-      newPrefix
-
-    };
-
-
-
-    if (args[1] === "-g")
-
-      if (role < 2)
-
-        return message.reply(getLang("onlyAdmin"));
-
-      else
-
-        formSet.setGlobal = true;
-
-    else
-
-      formSet.setGlobal = false;
-
-
-
-    return message.reply(args[1] === "-g" ? getLang("confirmGlobal") : getLang("confirmThisThread"), (err, info) => {
-
-      formSet.messageID = info.messageID;
-
-      global.GoatBot.onReaction.set(info.messageID, formSet);
-
-    });
-
-  },
-
-
-
-  onReaction: async function ({ message, threadsData, event, Reaction, getLang }) {
-
-    const { author, newPrefix, setGlobal } = Reaction;
-
-    if (event.userID !== author)
-
-      return;
-
-    if (setGlobal) {
-
-      global.GoatBot.config.prefix = newPrefix;
-
-      fs.writeFileSync(global.client.dirConfig, JSON.stringify(global.GoatBot.config, null, 2));
-
-      return message.reply(getLang("successGlobal", newPrefix));
-
-    }
-
-    else {
-
-      await threadsData.set(event.threadID, newPrefix, "data.prefix");
-
-      return message.reply(getLang("successThisThread", newPrefix));
-
-    }
-
-  },
-
-
-
-  onChat: async function ({ event, message, usersData, getLang }) {
-
-    const data = await usersData.get(event.senderID);
-
-    const name = data.name;
-
-    const xyrene = {
-
-      body: `🈷\x20\x20\x20\x20\x20\x20\x20${name}\x20\x20\x20\x20\x20\x20\x20🈷` + getLang("myPrefix", global.GoatBot.config.prefix, utils.getPrefix(event.threadID)),
-
-      attachment: await global.utils.getStreamFromURL("https://i.imgur.com/DPTioGT.gif")
-
+        const newPrefix = args[0];
+        const formSet = {
+            commandName,
+            author: event.senderID,
+            newPrefix
         };
 
-    if (event.body && event.body.toLowerCase() === "prefix")
+        if (args[1] === "-g")
+            if (role < 2)
+                return message.reply(getLang("onlyAdmin"));
+            else
+                formSet.setGlobal = true;
+        else
+            formSet.setGlobal = false;
 
-      return () => {
+        return message.reply(args[1] === "-g" ? getLang("confirmGlobal") : getLang("confirmThisThread"), (err, info) => {
+            formSet.messageID = info.messageID;
+            global.GoatBot.onReaction.set(info.messageID, formSet);
+        });
+    },
 
-        return message.reply(xyrene);
+    onReaction: async function ({ message, threadsData, event, Reaction, getLang }) {
+        const { author, newPrefix, setGlobal } = Reaction;
+        if (event.userID !== author)
+            return;
+        if (setGlobal) {
+            global.GoatBot.config.prefix = newPrefix;
+            fs.writeFileSync(global.client.dirConfig, JSON.stringify(global.GoatBot.config, null, 2));
+            return message.reply(getLang("successGlobal", newPrefix));
+        }
+        else {
+            await threadsData.set(event.threadID, newPrefix, "data.prefix");
+            return message.reply(getLang("successThisThread", newPrefix));
+        }
+    },
 
-      };
+    onChat: async function ({ event, message, getLang }) {
+        if (event.body && event.body.toLowerCase() === "prefix") {
+            const systemPrefix = global.GoatBot.config.prefix;
+            const boxPrefix = utils.getPrefix(event.threadID);
+            const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)]; // Select a random image URL
+            const attachment = await global.utils.getStreamFromURL(randomImageUrl);
 
-  }
-
+            return message.reply({
+                body: getLang("myPrefix", systemPrefix, boxPrefix),
+                attachment
+            });
+        }
+    }
 };
